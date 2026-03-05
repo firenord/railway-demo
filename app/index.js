@@ -1,6 +1,17 @@
 const http = require('http');
 
 const port = Number(process.env.PORT) || 3000;
+const message = process.env.MESSAGE || 'Hello World!';
+
+function escapeHtml(value) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
 const html = `<!doctype html>
 <html lang="en">
   <head>
@@ -9,7 +20,7 @@ const html = `<!doctype html>
     <title>Hello World</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+    <h1>${escapeHtml(message)}</h1>
   </body>
 </html>`;
 
